@@ -1,5 +1,3 @@
-# Alumni API Documentation
-
 ## Overview
 
 This document provides a comprehensive guide for developers to integrate with and use the Flask-based Alumni Management System API. It includes details on setup, endpoints, authentication flow, and system features.
@@ -395,6 +393,16 @@ def get_database_tables(self):
 
 ---
 
+###Updates to the models can be migrated with the alembic Operations
+
+```
+alembic revision --autogenerate -m 'intial update'
+
+alembic upgrade head
+```
+
+---
+
 ## BaseModel Functions
 
 The `BaseModel` class provides foundational functionality for all models.
@@ -501,20 +509,19 @@ user.delete()
 
 ### Common Errors and Responses
 
-| Error Code | Description                          | Response Example                     |
-| ---------- | ------------------------------------ | ------------------------------------- |
-| 400        | Bad Request                          | `{ "error": "Invalid input" }`      |
-| 401        | Unauthorized                         | `{ "error": "Unauthorized access" }`|
-| 404        | Not Found                            | `{ "error": "Resource not found" }` |
-| 500        | Internal Server Error                | `{ "error": "An unexpected error" }`|
+| Error Code | Description           | Response Example                     |
+| ---------- | --------------------- | ------------------------------------ |
+| 400        | Bad Request           | `{ "error": "Invalid input" }`       |
+| 401        | Unauthorized          | `{ "error": "Unauthorized access" }` |
+| 404        | Not Found             | `{ "error": "Resource not found" }`  |
+| 500        | Internal Server Error | `{ "error": "An unexpected error" }` |
 
 ### Debugging Tips
 
 - Ensure the `.env` file is correctly configured.
+- Ensure the email service is active for the SMTP to send reset password links to users
 - Check Redis server status.
 - Review logs for stack traces.
-
-
 
 ---
 
@@ -523,4 +530,3 @@ user.delete()
 - [Flask Documentation](https://flask.palletsprojects.com/)
 - [Flask-JWT-Extended Documentation](https://flask-jwt-extended.readthedocs.io/)
 - [SQLAlchemy Documentation](https://www.sqlalchemy.org/docs/)
-

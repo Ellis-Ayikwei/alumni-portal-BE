@@ -1,0 +1,12 @@
+2024-12-30 11:17:37,188 - app_auth - ERROR - Error saving audit trail: (MySQLdb._exceptions.DataError) (1265, "Data truncated for column 'status' at row 1")
+[SQL: INSERT INTO audit_trails (user_id, action, created_at, status, item_audited_id, id, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('b9fdfe0b-817a-433c-bd06-844d1bf9b766', 'logged out', datetime.datetime(2024, 12, 30, 11, 17, 37, 179164), 'successful', None, '1a35b035-a5b1-4cca-ac7e-a73daf57edcd', datetime.datetime(2024, 12, 30, 11, 17, 37, 179164))]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2024-12-30 11:19:38,360 - app_auth - ERROR - Error saving audit trail: (MySQLdb._exceptions.DataError) (1265, "Data truncated for column 'status' at row 1")
+[SQL: INSERT INTO audit_trails (user_id, action, created_at, status, item_audited_id, id, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('b9fdfe0b-817a-433c-bd06-844d1bf9b766', 'logged out', datetime.datetime(2024, 12, 30, 11, 19, 38, 356101), 'successful', None, '657dd234-7ebc-4efd-85c7-725e417474b8', datetime.datetime(2024, 12, 30, 11, 19, 38, 357082))]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)
+2024-12-30 11:21:21,496 - app_auth - ERROR - Error saving audit trail: (MySQLdb._exceptions.DataError) (1265, "Data truncated for column 'status' at row 1")
+[SQL: INSERT INTO audit_trails (user_id, action, created_at, status, item_audited_id, id, updated_at) VALUES (%s, %s, %s, %s, %s, %s, %s)]
+[parameters: ('b9fdfe0b-817a-433c-bd06-844d1bf9b766', 'logged out', datetime.datetime(2024, 12, 30, 11, 21, 21, 495159), 'successful', None, '69ed9a1b-a63a-4010-aa0b-4713ee81a747', datetime.datetime(2024, 12, 30, 11, 21, 21, 495159))]
+(Background on this error at: https://sqlalche.me/e/20/9h9h)

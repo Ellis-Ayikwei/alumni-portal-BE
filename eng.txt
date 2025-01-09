@@ -1,0 +1,1 @@
+['alembic_version', 'alumni_groups', 'amendments', 'attachments', 'audit_trails', 'beneficiaries', 'benefits', 'claims', 'contract_members', 'contracts', 'group_members', 'insurance_packages', 'invites', 'invoices', 'payment_methods', 'payments', 'users']

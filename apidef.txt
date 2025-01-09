@@ -1,0 +1,159 @@
+static                         HEAD, GET, OPTIONS   /static/<path:filename>                  No docstring
+app_views.status               HEAD, GET, OPTIONS   /alumni/api/v1/status                    to check the status of the api
+app_views.index                HEAD, GET, OPTIONS   /alumni/api/v1/                          the index route
+app_views.storage_counts       HEAD, GET, OPTIONS   /alumni/api/v1/stats                     return counts of all classes in storage
+app_views.get_users            HEAD, GET, OPTIONS   /alumni/api/v1/users                     Retrieves the list of all User objects
+app_views.get_user             HEAD, GET, OPTIONS   /alumni/api/v1/users/<user_id>           Retrieves a specific User
+app_views.delete_user          OPTIONS, DELETE      /alumni/api/v1/users/<user_id>           Deletes a User Object
+app_views.post_user            POST, OPTIONS        /alumni/api/v1/users                     Creates a User
+app_views.update_user          PUT, OPTIONS         /alumni/api/v1/users/<user_id>           Updates a User
+app_views.reset_user_password  PUT, OPTIONS         /alumni/api/v1/users/reset_password/<user_id> Resets a user's password
+app_views.get_user_profile     HEAD, GET, OPTIONS   /alumni/api/v1/users/my_profile/<user_id> Retrieves a user's profile information
+app_views.get_user_profile_completion HEAD, GET, OPTIONS   /alumni/api/v1/users/user_profile_completion/<user_id> Calculate the completion percentage of a user's profile.
+app_views.generate_group_invite POST, OPTIONS        /alumni/api/v1/alumni_groups/<group_id>/invite_code Generate an invite code for a user to join a specific group
+app_views.get_user_alumni_groups HEAD, GET, OPTIONS   /alumni/api/v1/alumni_groups/my_groups/<user_id> Retrieve all alumni groups a user is a part of
+app_views.get_all_alumni_groups HEAD, GET, OPTIONS   /alumni/api/v1/alumni_groups             Retrieve all alumni groups
+app_views.get_alumni_group     HEAD, GET, OPTIONS   /alumni/api/v1/alumni_groups/<group_id>  Retrieve a specific alumni group by ID
+app_views.create_alumni_group  POST, OPTIONS        /alumni/api/v1/alumni_groups             Create a new alumni group
+app_views.update_alumni_group  PUT, OPTIONS         /alumni/api/v1/alumni_groups/<group_id>  Update an existing alumni group
+app_views.delete_alumni_group  OPTIONS, DELETE      /alumni/api/v1/alumni_groups/<group_id>  Delete an alumni group
+app_views.get_user_group_memberships HEAD, GET, OPTIONS   /alumni/api/v1/group_members/my_groups_memberships/<user_id> Retrieve all group memberships for a specific user
+app_views.get_all_group_members HEAD, GET, OPTIONS   /alumni/api/v1/group_members             Retrieve all group members
+app_views.get_group_member     HEAD, GET, OPTIONS   /alumni/api/v1/group_members/<member_id> Retrieve a specific group member by ID
+app_views.get_members_of_group HEAD, GET, OPTIONS   /alumni/api/v1/alumni_groups/<group_id>/members Retrieve all members of a specific group
+app_views.create_group_member  POST, OPTIONS        /alumni/api/v1/alumni_groups/<group_id>/members Create a new group member
+
+    If the request contains an invite code, check if the code is valid and
+    has not been used before. If it has, send a 400 response with an error
+    message. If it's valid, increment the times used and set the last used
+    date to the current datetime.
+
+    If the user is already a member of the group, return a 409 response with
+    a message indicating that the user is already a member.
+
+    Otherwise, create a new GroupMember object with the provided data and
+    save it to the database.
+
+    Returns a JSON response with the newly created GroupMember object's
+    dictionary representation, with a 201 status code.
+app_views.check_group_member   HEAD, GET, OPTIONS   /alumni/api/v1/group_members/<group_id>/check/<member_id> Retrieve a specific group member by ID
+app_views.update_group_member  PUT, OPTIONS         /alumni/api/v1/group_members/<member_id> Update an existing group member
+app_views.delete_group_member  OPTIONS, DELETE      /alumni/api/v1/group_members/<member_id> Delete a group member
+app_views.get_all_amendments   HEAD, GET, OPTIONS   /alumni/api/v1/amendments                Retrieve all amendments
+app_views.get_amendment        HEAD, GET, OPTIONS   /alumni/api/v1/amendments/<amendment_id> Retrieve a specific amendment by ID
+app_views.create_amendment     POST, OPTIONS        /alumni/api/v1/amendments                Create a new amendment
+app_views.update_amendment     PUT, OPTIONS         /alumni/api/v1/amendments/<amendment_id> Update an existing amendment
+app_views.delete_amendment     OPTIONS, DELETE      /alumni/api/v1/amendments/<amendment_id> Delete an amendment
+app_views.get_all_contract_members HEAD, GET, OPTIONS   /alumni/api/v1/contract_members          Retrieve all contract members
+app_views.get_contract_member  HEAD, GET, OPTIONS   /alumni/api/v1/contract_members/<member_id> Retrieve a specific contract member by ID
+app_views.create_contract_member POST, OPTIONS        /alumni/api/v1/contract_members          Create a new contract member
+app_views.update_contract_member PUT, OPTIONS         /alumni/api/v1/contract_members/<member_id> Update an existing contract member
+app_views.delete_contract_member OPTIONS, DELETE      /alumni/api/v1/contract_members/<member_id> Delete a contract member
+app_views.get_all_insurance_packages HEAD, GET, OPTIONS   /alumni/api/v1/insurance_packages        Retrieve all insurance packages
+app_views.get_insurance_package_by_id HEAD, GET, OPTIONS   /alumni/api/v1/insurance_packages/<package_id> Retrieve a specific insurance package by ID
+app_views.create_insurance_package POST, OPTIONS        /alumni/api/v1/insurance_packages        Create a new insurance package
+app_views.update_insurance_package PUT, OPTIONS         /alumni/api/v1/insurance_packages/<package_id> Update an existing insurance package
+app_views.delete_insurance_package OPTIONS, DELETE      /alumni/api/v1/insurance_packages/<package_id> Delete an insurance package
+app_views.get_users_payments   HEAD, GET, OPTIONS   /alumni/api/v1/payments/users_payments/<user_id> Retrieve all payments made by a user
+app_views.get_all_payments     HEAD, GET, OPTIONS   /alumni/api/v1/payments                  Retrieve all payments
+app_views.get_payment          HEAD, GET, OPTIONS   /alumni/api/v1/payments/<payment_id>     Retrieve a specific payment by ID
+app_views.create_payment       POST, OPTIONS        /alumni/api/v1/payments                  Create a new payment
+app_views.update_payment       PUT, OPTIONS         /alumni/api/v1/payments/<payment_id>     Update an existing payment
+app_views.delete_payment       OPTIONS, DELETE      /alumni/api/v1/payments/<payment_id>     Delete a payment
+app_views.serve_file           HEAD, GET, OPTIONS   /alumni/api/v1/uploads/<filename>        Serve a previously uploaded file
+app_views.delete_file          OPTIONS, DELETE      /alumni/api/v1/uploads/<id>/<filename>   Delete a previously uploaded file
+app_views.download_file        HEAD, GET, OPTIONS   /alumni/api/v1/download/<filename>       No docstring
+app_views.get_all_payment_methods HEAD, GET, OPTIONS   /alumni/api/v1/payment_methods           Retrieve all payment methods
+app_views.get_payment_method   HEAD, GET, OPTIONS   /alumni/api/v1/payment_methods/<payment_method_id> Retrieve a specific payment method by ID
+app_views.create_payment_method POST, OPTIONS        /alumni/api/v1/payment_methods           Create a new payment method
+app_views.update_payment_method PUT, OPTIONS         /alumni/api/v1/payment_methods/<payment_method_id> Update an existing payment method
+app_views.delete_payment_method OPTIONS, DELETE      /alumni/api/v1/payment_methods/<payment_method_id> Delete a payment method
+app_views.get_contracts_for_user HEAD, GET, OPTIONS   /alumni/api/v1/contracts/my_contracts/<string:user_id> Retrieve all contracts for a user
+
+    Args:
+        user_id (str): The ID of the user
+
+    Returns:
+        tuple[list[dict], int]: A list of contracts and a status code
+app_views.get_contracts_for_group HEAD, GET, OPTIONS   /alumni/api/v1/contracts/my_contracts/<string:group_id> Retrieve all contracts for a group
+
+    Args:
+        group_id (str): The ID of the group
+
+    Returns:
+        tuple[list[dict], int]: A list of contracts and a status code
+app_views.get_all_contracts    HEAD, GET, OPTIONS   /alumni/api/v1/contracts                 Retrieve all contracts
+app_views.get_contract_by_id   HEAD, GET, OPTIONS   /alumni/api/v1/contracts/<contract_id>   Retrieve a specific contract by ID
+app_views.create_contract      POST, OPTIONS        /alumni/api/v1/contracts                 Create a new contract
+app_views.update_contract      PUT, OPTIONS         /alumni/api/v1/contracts/<contract_id>   Update an existing contract
+        -create new invoice when a contract gets activated
+
+    Args:
+        contract_id (str): The ID of the contract to update
+
+    Returns:
+        tuple[dict, int]: A JSON response and a status code
+app_views.delete_contract      OPTIONS, DELETE      /alumni/api/v1/contracts/<contract_id>   Delete a contract
+app_views.get_contract_doc     HEAD, GET, OPTIONS   /alumni/api/v1/contract_doc/<contract_id> No docstring
+app_views.get_all_beneficiaries HEAD, GET, OPTIONS   /alumni/api/v1/beneficiaries             Retrieve all beneficiaries
+app_views.get_beneficiary      HEAD, GET, OPTIONS   /alumni/api/v1/beneficiaries/<beneficiary_id> Retrieve a specific beneficiary by ID
+app_views.get_user_beneficiaries HEAD, GET, OPTIONS   /alumni/api/v1/users/<user_id>/beneficiaries Retrieve all beneficiaries for a specific user by ID
+app_views.create_beneficiary   POST, OPTIONS        /alumni/api/v1/beneficiaries             Create a new beneficiary
+app_views.update_beneficiary   PUT, OPTIONS         /alumni/api/v1/beneficiaries/<beneficiary_id> Update an existing beneficiary
+app_views.delete_beneficiary   OPTIONS, DELETE      /alumni/api/v1/beneficiaries/<beneficiary_id> Delete a beneficiary
+app_views.get_audit_trails     HEAD, GET, OPTIONS   /alumni/api/v1/audit_trails              Retrieve audit trails for a given user ID
+app_views.get_users_invoices   HEAD, GET, OPTIONS   /alumni/api/v1/invoices/users_invoices/<user_id> Retrieve all invoices of a user
+app_views.get_all_invoices     HEAD, GET, OPTIONS   /alumni/api/v1/invoices                  Retrieve all invoices
+app_views.get_invoice          HEAD, GET, OPTIONS   /alumni/api/v1/invoices/<invoice_id>     Retrieve a specific invoice by ID
+app_views.create_invoice       POST, OPTIONS        /alumni/api/v1/invoices                  Create a new invoice
+app_views.update_invoice       PUT, OPTIONS         /alumni/api/v1/invoices/<invoice_id>     Update an existing invoice
+app_views.delete_invoice       OPTIONS, DELETE      /alumni/api/v1/invoices/<invoice_id>     Delete an invoice
+app_views.send_invoice         POST, OPTIONS        /alumni/api/v1/send_invoice/<invoice_id> Delete an invoice
+app_auth.register              POST, OPTIONS        /alumni/api/v1/auth/register             Register a new user
+        - check if user already exists
+        - check if email is already registered
+        - check if username is already taken
+        - create new user
+    Returns:
+        tuple: A tuple containing the response data and HTTP status code
+
+    Args:
+        form_data (dict): A dictionary containing the user details
+
+    Returns:
+        tuple: A tuple containing the response data and HTTP status code
+app_auth.login                 POST, OPTIONS        /alumni/api/v1/auth/login                Handle login requests.
+
+    Args:
+        data (dict): A dictionary containing the username/email and password.
+
+    Returns:
+        tuple: A tuple containing the response data and HTTP status code.
+app_auth.refresh_access_token  POST, OPTIONS        /alumni/api/v1/auth/refresh_token        Refresh an access token.
+
+    Args:
+        None
+
+    Returns:
+        tuple: A tuple containing the response data and HTTP status code.
+app_auth.logout                POST, OPTIONS        /alumni/api/v1/auth/logout               Logout the user by revoking their access token.
+    Rovokes the access token in the Redis cache and returns a success message.
+
+
+    Returns:
+        A JSON response indicating the success or failure of the logout operation.
+app_auth.recover_password      POST, OPTIONS        /alumni/api/v1/auth/recover              recover password
+app_auth.reset_password        POST, OPTIONS        /alumni/api/v1/auth/reset_password/<token>/<email> reset password
+flasgger.static                HEAD, GET, OPTIONS   /flasgger_static/<path:filename>         The view function used to serve files from
+        :attr:`static_folder`. A route is automatically registered for
+        this view at :attr:`static_url_path` if :attr:`static_folder` is
+        set.
+
+        Note this is a duplicate of the same method in the Flask
+        class.
+
+        .. versionadded:: 0.5
+flasgger.apidocs               HEAD, GET, OPTIONS   /apidocs/                                The /apidocs
+flasgger.oauth_redirect        HEAD, GET, OPTIONS   /oauth2-redirect.html                    The OAuth2 redirect HTML for Swagger UI standard/implicit flow
+flasgger.<lambda>              HEAD, GET, OPTIONS   /apidocs/index.html                      No docstring
+flasgger.apispec_1             HEAD, GET, OPTIONS   /apispec_1.json                          The /apispec_1.json and other specs

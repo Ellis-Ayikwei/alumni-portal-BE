@@ -393,7 +393,7 @@ def get_database_tables(self):
 
 ---
 
-###Updates to the models can be migrated with the alembic Operations
+### Updates to the models can be migrated with the alembic Operations
 
 ```
 alembic revision --autogenerate -m 'intial update'

@@ -47,6 +47,12 @@ MAIL_USERNAME=<your-email>
 MAIL_PASSWORD=<your-app-password>
 SECRET_KEY=<your-secret-key>
 REDIS_URL=redis://localhost:6379/0
+
+AP_MYSQL_USER=<your-mysql-user>
+AP_MYSQL_PWD=<your-mysql-password>
+AP_MYSQL_HOST=<your-mysql-host>
+AP_MYSQL_DB=<your-mysql-database>
+AP_MYSQL_PORT=<your-mysql-port>
 ```
 
 ### 5. Start Redis Server
@@ -72,14 +78,105 @@ python -m api.v1.app  # Use `python3` on Linux/macOS if needed
 
 ```
 project-root/
-|— api/v1/
-    |— app.py          # Main entry point
-    |— src/
-        |— views/       # API views
-            |— auth_views.py  # Authentication routes
-            |— app_views.py   # Application routes
-|— requirements.txt  # Dependencies
-|— .env             # Environment configuration
+v1
+    ├── __init__.py
+    ├── app.py
+    └── src
+        ├── __init__.py
+        ├── helpers
+        │   └── helper_functions.py
+        ├── services
+        │   ├── __init__.py
+        │   ├── amendment_service.py
+        │   ├── auditslogging
+        │   │   ├── __init__.py
+        │   │   ├── group_member_auditor.py
+        │   │   └── logginFn.py
+        │   ├── fileuplaoder.py
+        │   ├── middlewares.py
+        │   ├── permissions.py
+        │   ├── policynumber.py
+        │   └── sendmail.py
+        ├── utils
+        │   └── contract_view_utils.py
+        └── views
+            ├── .vscode
+            │   └── settings.json
+            ├── __init__.py
+            ├── alumni_group_bp.py
+            ├── amemdemt_bp.py
+            ├── audit_trails_bp.py
+            ├── authentication
+            │   ├── __init__.py
+            │   ├── __pycache__
+            │   ├── auth_utility.py
+            │   ├── login_bp.py
+            │   ├── logout_bp.py
+            │   ├── recorver_password_bp.py
+            │   ├── register_bp.py
+            │   └── user_validation.py
+            ├── beneficiary_bp.py
+            ├── contract_members_bp.py
+            ├── contracts_bp.py
+            ├── group_member_bp.py
+            ├── index_bp.py
+            ├── insurance_package_bp.py
+            ├── invoices_bp.py
+            ├── payment_methods_bp.py
+            ├── paymets_bp.py
+            └── user_bp.py
+├── models
+│   ├── __init__.py
+│   ├── alumni_group.py
+│   ├── amendment.py
+│   ├── attachments.py
+│   ├── audit_trails.py
+│   ├── basemodel.py
+│   ├── beneficiary.py
+│   ├── benefit.py
+│   ├── contract.py
+│   ├── contract_history.py
+│   ├── attachments.py
+│   ├── audit_trails.py
+│   ├── basemodel.py
+│   ├── beneficiary.py
+│   ├── benefit.py
+│   ├── contract.py
+│   ├── contract_history.py
+│   ├── contract.py
+│   ├── contract_history.py
+│   ├── contract_member.py
+│   ├── contract_member_history.py
+│   ├── doc_sample.py
+│   ├── engine
+│   ├── contract_member_history.py
+│   ├── doc_sample.py
+│   ├── engine
+│   │   ├── __init__.py
+│   ├── engine
+│   │   └── db_storage.py
+│   ├── group_member.py
+│   ├── helpers
+│   ├── group_member.py
+│   ├── helpers
+│   ├── helpers
+│   │   └── status.py
+│   ├── insurance_package.py
+│   ├── insurance_package.py
+│   ├── invite.py
+│   ├── invoice.py
+│   ├── invite.py
+│   ├── invoice.py
+│   ├── payment.py
+│   ├── invoice.py
+│   ├── payment.py
+│   ├── payment.py
+│   ├── payment_method.py
+│   ├── payment_method.py
+│   ├── permission.py
+│   └── user.py
+|— requirements.txt
+|— .env
 ```
 
 ---

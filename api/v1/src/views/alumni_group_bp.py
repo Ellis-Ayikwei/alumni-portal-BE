@@ -15,7 +15,7 @@ from flask_jwt_extended import get_jwt, jwt_required
 from api.v1.src.views import app_views
 from models.invite import Invite
 from models.user import GroupMember, User
-from models.permission import require_permission
+from api.v1.src.utils.require_permission import require_permission
 
 
 @app_views.route(

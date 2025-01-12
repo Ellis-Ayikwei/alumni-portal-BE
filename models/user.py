@@ -17,14 +17,12 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 import enum
-from api.v1.src.services import permissions
 from models.amendment import Amendment
 from models.basemodel import BaseModel, Base
 import bcrypt
 from models.alumni_group import admins
 
 from models.group_member import GroupMember
-from models.permission import Action, ResourceType
 
 
 

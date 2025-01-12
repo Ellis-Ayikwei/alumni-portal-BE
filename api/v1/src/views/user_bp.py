@@ -7,13 +7,13 @@ from sqlalchemy import JSON
 from api.v1.app import log_audit
 from models.permission import Action, Permission, PermissionManager, ResourceType
 from models.user import User
-from models import storage
 from . import app_views
 from flask import abort, g, jsonify, make_response, request
 from flasgger.utils import swag_from
 from models.audit_trails import AuditStatus
 from flask_jwt_extended import jwt_required
-from models.permission import require_permission
+from api.v1.src.utils.require_permission import require_permission
+
 
 
 @app_views.route('/permissions', methods=['GET'])
@@ -22,6 +22,7 @@ def get_permissions_by_resource():
     """
     Retrieves a dictionary of resource types mapped to their available actions
     """
+    from models import storage
     global_user_id = g.user.id
     permissions_by_resource = {}
 
@@ -62,6 +63,7 @@ def update_user_permissions(user_id):
     - Adds permissions to the user.
     - Removes permissions from the user.
     """
+    from models import storage
     global_user_id = g.user.id
     log_audit(global_user_id , "updating user permissions", status=AuditStatus.COMPLETED, details=None, item_audited=None)
     from flask import request, jsonify
@@ -114,6 +116,7 @@ def get_users():
     """
     Retrieves the list of all User objects
     """
+    from models import storage
     all_users = storage.all(User).values()
     list_users = []
     for user in all_users:
@@ -125,6 +128,7 @@ def get_users():
 @require_permission("user", "view")
 def get_user(user_id):
     """Retrieves a specific User"""
+    from models import storage
     global_user_id = g.user.id
     log_audit(global_user_id , "retrieving user", status=AuditStatus.COMPLETED, details=None, item_audited=user_id)
     from api.v1.src.helpers.helper_functions import get_user_id_from_all_user
@@ -148,6 +152,7 @@ def delete_user(user_id):
     """
     Deletes a User Object
     """
+    from models import storage
     global_user_id = g.user.id
     log_audit(global_user_id , "deleting user", status=AuditStatus.COMPLETED, details=None, item_audited=user_id)
 
@@ -222,6 +227,7 @@ def update_user(user_id: str) -> tuple:
     """
     Updates a User
     """
+    from models import storage
     global_user_id = g.user.id
     log_audit(global_user_id , "updating user", status=AuditStatus.COMPLETED, details=None, item_audited=user_id)
     data = request.get_json()
@@ -256,6 +262,7 @@ def update_user(user_id: str) -> tuple:
 @jwt_required()
 def reset_user_password(user_id: str) -> tuple:
     """Resets a user's password"""
+    from models import storage
     global_user_id = g.user.id
     log_audit(global_user_id, "resetting user password", status=AuditStatus.INITIATED, details=None, item_audited=user_id)
     user = storage.get(User, user_id)
@@ -300,6 +307,8 @@ def get_user_profile(user_id: str) -> tuple:
     """
     Retrieves a user's profile information
     """
+    from models import storage
+    
     global_user_id = g.user.id
     user_instance = storage.get(User, user_id)
     if user_instance is None:
@@ -314,6 +323,8 @@ def get_user_profile(user_id: str) -> tuple:
 @jwt_required()
 def get_user_profile_completion(user_id: str) -> tuple:
     """Calculate the completion percentage of a user's profile."""
+    from models import storage
+    
     global_user_id = g.user.id
     user_instance = storage.get(User, user_id)
     if user_instance is None:

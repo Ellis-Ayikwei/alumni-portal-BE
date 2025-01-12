@@ -4,7 +4,6 @@ import json
 from urllib import response
 from flask import Flask, jsonify, render_template
 from api.v1.src.views import app_views
-from models import storage
 
 
 @app_views.route("/status")
@@ -24,6 +23,7 @@ def storage_counts():
     """
     return counts of all classes in storage
     """
+    from models import storage
     cls_counts = {
         "Users": storage.count("User"),
         "Beneficiaries": storage.count("Beneficiary"),

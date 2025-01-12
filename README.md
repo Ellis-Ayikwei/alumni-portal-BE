@@ -485,6 +485,15 @@ storage.new(new_group)
 storage.save()
 ```
 
+
+#### Create a new super user
+run the the following command and follow the prompt
+
+```
+python create_sudoer.py
+
+```
+
 ### Using `BaseModel`
 
 #### Create and Save a User

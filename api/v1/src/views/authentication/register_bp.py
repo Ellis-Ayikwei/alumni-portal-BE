@@ -27,6 +27,7 @@ def register() -> tuple[dict, int]:
     Returns:
         tuple: A tuple containing the response data and HTTP status code
     """
+    print("Registering a new user", flush=True)
     from models.permission import PermissionManager
     form_data = request.get_json()
     print(form_data, flush=True)

@@ -32,7 +32,7 @@ def get_user_id_from_all_user(username=None, email=None):
     return user_id
 
 
-def is_username_already_taken(data: dict) -> bool:
+def is_username_already_taken(username: str) -> bool:
     """
     Check if the provided username is already taken by another user.
     """
@@ -40,13 +40,13 @@ def is_username_already_taken(data: dict) -> bool:
     users_data = users_response.get_json()
 
     for user in users_data:
-        if user["username"].casefold() == data["username"].casefold():
+        if user["username"].casefold() == username.casefold():
             return True
 
     return False
 
 
-def is_email_already_registered(data: dict) -> bool:
+def is_email_already_registered(email: str) -> bool:
     """
     Check if the provided email is already taken by another user.
     """
@@ -54,7 +54,7 @@ def is_email_already_registered(data: dict) -> bool:
     users_data = users_response.get_json()
 
     for user in users_data:
-        if user["email"].casefold() == data["email"].casefold():
+        if user["email"].casefold() == email.casefold():
             return True
 
     return False
